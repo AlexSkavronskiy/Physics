@@ -1,25 +1,19 @@
-import matplotlib.pyplot as plt
 import numpy as np
-
-def start():
-    data = []
-    for i in range(0,100):
-        data.append(i)
-    arr=[]
-    for i in range(0,100):
-        arr.append(data[-i]**2)
-    ty=np.linspace(0,10,200)
-    print(arr)
-    print(arr[::-1])
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
 
 
-    plt.plot(ty)
-    plt.plot(data[::-1])
+def plot3d():
+    x = np.linspace(-3.14, 3.14)
+    y = np.linspace(-1, 1)
+    xs=np.sin(y)
+    ys=np.sin(x)
+
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+    ax.plot(xs, ys, marker='x')
     plt.show()
-"""def tableload():
-    arr=np.genfromtxt('file',delimiter=',')
-    arr=arr[1::]
-"""
-if __name__=='__main__':
-    start()
 
+
+if __name__ == '__main__':
+    plot3d()
