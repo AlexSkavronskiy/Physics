@@ -8,6 +8,7 @@ fDict = {
     '∆t': 0,
     't': 10
 }
+
 for i in range(len(allValues)):
     summ += allValues[i]
 avSumm = summ / len(allValues)
