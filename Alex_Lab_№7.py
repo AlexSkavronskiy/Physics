@@ -1,6 +1,5 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
 
 
 def plot3d():
@@ -12,6 +11,7 @@ def plot3d():
     fig = plt.figure()
     ax = fig.add_subplot(111)
     ax.plot(xs, ys, marker='x')
+    ax.bar([9.54, 9.64, 9.74, 9.84, 9.94, 10.04, 10.14, 10.24, 10.34], [4, 7, 8, 7, 12, 5, 4, 3, 0], width=0.1)
     plt.show()
 
 
