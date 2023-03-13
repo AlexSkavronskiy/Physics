@@ -98,6 +98,11 @@ plt.xlabel("X")
 plt.ylabel("Y")
 plt.show()
 
+
+sigma2=2.0086
+sigma3=((1 /(fDict['N']*(fDict['N'] - 1))) * (sum(allValues2))) ** (1 / 2)
+
+print(sigma3*sigma2)
 '''
 import numpy as np
 import matplotlib.pyplot as plt
