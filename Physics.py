@@ -43,66 +43,54 @@ for j in range(8):
 
 fDict['prom2'] = prom2
 
-alldelN = [[] for y in range(8)]
+alldelN2 = [[] for y in range(8)]
 for j in range(8):
     for i in range(8):
-        alldelN[j].append(len(prom2[i]))
-print(alldelN[0])
-
-fDict['allValues'] = allValues
+        alldelN2[j].append(len(prom2[i]))
+alldelN = alldelN2[0]
 
 tn = round(sum(allValues) / 50, 2)
 
+fDict['t'] = [9.59, 9.69, 9.79, 9.89, 9.99, 10.09, 10.19, 10.29]
+fDict['tn'] = tn
+fDict['allValues'] = allValues
+fDict['alldelN'] = alldelN
+
+print(fDict['t'][0:6])
 allValues2 = []
 for i in range(len(allValues)):
     allValues2.append(round((allValues[i] - tn) ** 2, 2))
-
 sigmaN = ((1 / (fDict['N'] - 1)) * (sum(allValues2))) ** (1 / 2)
 
-import numpy as np
-import matplotlib.pyplot as plt
+print('allValues2=', sum(allValues2), '\n''sigmaN=', sigmaN)
 
-# def plot3d():
-#
-#     x = np.linspace(9.54, 10.34, 1)
-#     y = np.sin(x)
-#
-#     fig, ax = plt.subplots()
-#     plt.bar([9.59, 9.69, 9.79,9.89, 9.99, 10.09, 10.19, 10.29], [0.8, 1.4, 1.6, 1.4, 2.4, 1.0, 0.8, 0.6], width=0.098)
-#     ax.plot(x, y,
-#             linestyle='-',
-#             linewidth=1,
-#             color='crimson')
-#
-#     plt.show()
-#
-#
-# if __name__ == '__main__':
-#     plot3d()
+pt = [0, 0.536829, 1.08411, 1.68755, 2.02485, 1.87274, 1.33510, 0.733663, 0.310763, 0]
 
-print(alldelN[0])
-p = []
-for i in range(len(alldelN[0])):
-    p.append(((1 / (sigmaN * math.sqrt((2 * math.pi)))) * math.exp(((alldelN[0][i] - tn) ** 2) / (-2 * sigmaN ** 2))))
-print(p)
-
-import numpy as np
 import numpy as np
 from scipy.interpolate import make_interp_spline
 import matplotlib.pyplot as plt
 
-plt.bar([9.59, 9.69, 9.79, 9.89, 9.99, 10.09, 10.19, 10.29], [0.8, 1.4, 1.6, 1.4, 2.4, 1.0, 0.8, 0.6], width=0.098)
-x = np.array([9.59, 9.69, 9.79, 9.89, 9.99, 10.09, 10.19, 10.29])
-y = np.array([0.8, 1.4, 1.6, 1.4, 2.4, 1.0, 0.8, 0.6])
+print(fDict)
+
+Psigma = []
+h = 8
+delNSigma = [[] for y in range(h)]
+for j in range(1, 4):
+    for i in allValues:
+        if fDict['tn'] - sigmaN * j <= i <= fDict['tn'] + sigmaN * j:
+            delNSigma[j].append(i)
+    print(j, len(delNSigma[j]))
+    Psigma.append(len(delNSigma[j]) / 50)
+print(Psigma)
+
+plt.bar(fDict['t'], [0.8, 1.4, 1.6, 1.4, 2.4, 1.0, 0.8, 0.6], width=0.098)
+x = np.array([9.4, 9.59, 9.69, 9.79, 9.89, 9.99, 10.09, 10.19, 10.29, 10.45])
+y = np.array(pt)
 
 X_Y_Spline = make_interp_spline(x, y)
 
-# Returns evenly spaced numbers
-# over a specified interval.
-X_ = np.linspace(x.min(), x.max(), 500)
+X_ = np.linspace(x.min(), x.max(), 1000)
 Y_ = X_Y_Spline(X_)
-
-# Plotting the Graph
 
 plt.plot(X_, Y_, c='red')
 plt.title("Plot Smooth Curve Using the scipy.interpolate.make_interp_spline() Class")
